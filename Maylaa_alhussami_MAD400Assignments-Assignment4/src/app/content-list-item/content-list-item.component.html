@@ -1,0 +1,20 @@
+<!-- Since it's optional, we need to make sure it exists before we use properties from it -->
+<!-- One way to do that is to use an if statement (similar to how we would in JavaScript/TypeScript) -->
+<div *ngIf="contentItemInputValue">
+    <!-- Any code inside the wrapping div is only displayed on the page if contentItemInputValue exists and has a valid value -->
+    <h2>{{contentItemInputValue.title}}</h2>
+    <img *ngIf="contentItemInputValue.imgSrc" [src]="contentItemInputValue.imgSrc" (click)="imageClicked()">
+    <!-- I use innerHTML here juts in case I want to use HTML syntax in my description later -->
+    <p *ngIf="contentItemInputValue.description" [innerHTML]="contentItemInputValue.description"></p>
+    <!-- Grabbed the rest of this code from my old ContentList toString in assignment 1 -->
+    <!-- and modified it to be Angular syntax instead -->
+    <div class="meta-data">
+      <span class="author">{{contentItemInputValue.author}}</span>
+      <span class="type">{{contentItemInputValue.type}}</span>
+    </div>
+    <!-- Note you can't have an ngIf and an ngFor on the same tag as the conflict, so wrapping div helps me overcome that limitation -->
+    <div *ngIf="contentItemInputValue.tags" class="tags">
+      <!-- Since the tags property is an array, we use an ngFor to display all of them -->
+      <span *ngFor="let tag of contentItemInputValue.tags">{{tag}}</span>
+    </div>
+  </div>
